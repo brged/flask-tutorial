@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- 模板中定义三个块，这些块会被其他模板重载 -->
+<!-- 改变显示在浏览器标签和窗口中的标题 -->
+<title>{% block title %}{% endblock %} - Flask</title>
+<link rel="stylesheet" href="{{url_for('static', filename = 'style.css')}}">
+<nav>
+    <h1>Flaskr</h1>
+    <ul>
+        {% if g.user %}
+        <li><span>{{ g.user['username'] }}</span></li>
+        <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+        {% else %}
+        <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+        <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<section class="content">
+    <!-- 类似于 title ，但是会改变页面的标题 -->
+    <header>{% block header %}{% endblock %}</header>
+    {% for message in get_flashed_messages() %}
+        <!--  显示 flash() 处理的信息 -->
+        <div class="flash">{{ message }}</div>
+    {% endfor %}
+    <!-- 每个页面的具体内容，如登录表单或者博客帖子 -->
+    {% block content %}{% endblock %}
+</section>
