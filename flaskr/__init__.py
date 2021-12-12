@@ -32,4 +32,8 @@ def create_app(test_config=None):
     def hello():
         return "Hello, World!"
     
+    from . import db
+    # 注册 close_db 和 init_db_command 函数
+    db.init_app(app)
+
     return app
