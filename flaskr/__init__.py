@@ -32,8 +32,12 @@ def create_app(test_config=None):
     def hello():
         return "Hello, World!"
     
-    from . import db
     # 注册 close_db 和 init_db_command 函数
+    from . import db
     db.init_app(app)
+
+    # 导入并注册 蓝图
+    from . import auth
+    app.register_blueprint(auth.bp)
 
     return app
