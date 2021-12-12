@@ -7,7 +7,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from flaskr.db import get_db
 
-bp = Blueprint("auth", __name__, "/auth")
+bp = Blueprint("auth", __name__, url_prefix="/auth")
 
 """当用访问 /auth/register URL 时， register 视图会返回用于填写注册 内容的表单的 HTML 。
 当用户提交表单时，视图会验证表单内容，然后要么再次 显示表单并显示一个出错信息，
